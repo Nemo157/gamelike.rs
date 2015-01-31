@@ -1,0 +1,28 @@
+[package]
+  name = "gamelike"
+  version = "0.0.1"
+  authors = ["Wim Looman <ghostunderscore@gmail.com>"]
+
+[dependencies.gfx]
+  git = "http://github.com/gfx-rs/gfx-rs"
+
+[dependencies.gfx_macros]
+  git = "http://github.com/gfx-rs/gfx-rs"
+
+[dependencies.device]
+  git = "https://github.com/gfx-rs/gfx-rs"
+
+[dependencies.render]
+  git = "https://github.com/gfx-rs/gfx-rs"
+
+[dependencies.glfw]
+  git = "https://github.com/bjz/glfw-rs"
+
+[dependencies.carboxyl]
+  git = "https://github.com/aepsil0n/carboxyl"
+
+[dependencies.clock_ticks]
+  git = "https://github.com/tomaka/clock_ticks"
+
+[dependencies.nalgebra]
+  git = "https://github.com/sebcrozet/nalgebra"
