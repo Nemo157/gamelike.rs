@@ -10,6 +10,7 @@ extern crate nalgebra;
 mod app;
 mod view;
 mod world;
+mod event;
 mod camera;
 
 fn main() {

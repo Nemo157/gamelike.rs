@@ -3,6 +3,8 @@ use clock_ticks::precise_time_ns;
 
 use { view, world, camera };
 
+use event::Event;
+
 pub use self::init::init;
 
 mod init;
@@ -27,35 +29,12 @@ impl App {
             let mut loops = 0;
             while precise_time_ns() > next_game_tick && loops < MAX_FRAMESKIP {
                 self.glfw.poll_events();
-                for (_, event) in glfw::flush_messages(&self.view.events) {
+                for event in glfw::flush_messages(&self.view.events).filter_map(|(_, event)| Event::from_glfw(event)) {
                     match event {
-                        glfw::WindowEvent::Key(glfw::Key::Escape, _, glfw::Action::Press, _) => should_close = true,
-                        glfw::WindowEvent::Close => should_close = true,
-                        glfw::WindowEvent::Key(glfw::Key::A, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Left),
-                        glfw::WindowEvent::Key(glfw::Key::A, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Left),
-                        glfw::WindowEvent::Key(glfw::Key::W, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Forward),
-                        glfw::WindowEvent::Key(glfw::Key::W, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Forward),
-                        glfw::WindowEvent::Key(glfw::Key::D, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Right),
-                        glfw::WindowEvent::Key(glfw::Key::D, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Right),
-                        glfw::WindowEvent::Key(glfw::Key::S, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Back),
-                        glfw::WindowEvent::Key(glfw::Key::S, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Back),
-                        glfw::WindowEvent::Key(glfw::Key::Space, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Up),
-                        glfw::WindowEvent::Key(glfw::Key::Space, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Up),
-                        glfw::WindowEvent::Key(glfw::Key::Z, _, glfw::Action::Press, _) =>
-                            self.view.camera.start_move(camera::Direction::Down),
-                        glfw::WindowEvent::Key(glfw::Key::Z, _, glfw::Action::Release, _) =>
-                            self.view.camera.stop_move(camera::Direction::Down),
-                        _ => {},
+                        Event::Quit
+                            => should_close = true,
+                        Event::Camera(direction, action)
+                            => self.view.camera.event(direction, action),
                     }
                 }
                 self.world.tick();

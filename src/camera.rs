@@ -5,14 +5,10 @@ use std::collections::HashSet;
 use nalgebra::{ Vec3, Pnt3, Cross, Norm };
 
 #[derive(Eq, PartialEq, Debug, Hash)]
-pub enum Direction {
-    Forward,
-    Back,
-    Right,
-    Left,
-    Up,
-    Down,
-}
+pub enum Direction { Forward, Back, Right, Left, Up, Down }
+
+#[derive(Eq, PartialEq, Debug, Hash)]
+pub enum Action { Start, Stop }
 
 pub struct Camera {
     position: Pnt3<f64>,
@@ -48,12 +44,11 @@ impl Camera {
         }
     }
 
-    pub fn start_move(&mut self, direction: Direction) {
-        self.to_move.insert(direction);
-    }
-
-    pub fn stop_move(&mut self, direction: Direction) {
-        self.to_stop.insert(direction);
+    pub fn event(&mut self, direction: Direction, action: Action) {
+        match action {
+            Action::Start => self.to_move.insert(direction),
+            Action::Stop => self.to_stop.insert(direction),
+        };
     }
 
     pub fn turn(&mut self, horizontal: f64, vertical: f64) {
