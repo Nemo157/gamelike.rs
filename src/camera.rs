@@ -52,7 +52,18 @@ impl Camera {
     }
 
     pub fn turn(&mut self, horizontal: f64, vertical: f64) {
-        unimplemented!();
+        let original_look = (self.lookat - self.position).normalize();
+
+        let x = original_look.x;
+        let y = original_look.y;
+        let z = original_look.z;
+
+        let r = (x*x + y*y + z*z).sqrt();
+
+        let theta = (PI - 0.01).min(0.0.max((y / r).acos() + self.sensitivity * vertical));
+        let phi = z.atan2(x) + self.sensitivity * horizontal;
+
+        self.lookat = self.position + Vec3::new(r * theta.sin() * phi.cos(), r * theta.cos(), r * theta.sin() * phi.sin()).normalize();
     }
 
     pub fn view(&self, interpolation: f64) -> [[f32; 4]; 4] {
