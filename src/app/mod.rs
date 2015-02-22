@@ -1,4 +1,3 @@
-use glfw;
 use clock_ticks::precise_time_ns;
 
 use { view, world, camera };
@@ -15,7 +14,6 @@ const MAX_FRAMESKIP: u8 = 2;
 
 pub struct App {
     start: u64,
-    glfw: glfw::Glfw,
     world: world::World,
     view: view::View,
 }
@@ -28,8 +26,7 @@ impl App {
         while !should_close {
             let mut loops = 0;
             while precise_time_ns() > next_game_tick && loops < MAX_FRAMESKIP {
-                self.glfw.poll_events();
-                for event in glfw::flush_messages(&self.view.events).filter_map(|(_, event)| Event::from_glfw(event)) {
+                for event in self.view.display.poll_events().filter_map(Event::from_glfw) {
                     match event {
                         Event::Quit
                             => should_close = true,

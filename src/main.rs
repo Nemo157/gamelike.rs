@@ -1,11 +1,14 @@
 #![feature(core)]
 #![feature(plugin)]
 
-extern crate gfx;
-extern crate glfw;
+#![plugin(glium)]
+#![plugin(glium_macros)]
+
+#[macro_use] extern crate glium;
+extern crate glutin;
 extern crate clock_ticks;
 extern crate nalgebra;
-#[macro_use] #[plugin] extern crate gfx_macros;
+#[macro_use] extern crate glium_macros;
 
 mod app;
 mod view;

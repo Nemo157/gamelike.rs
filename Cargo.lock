@@ -2,25 +2,38 @@
 name = "gamelike"
 version = "0.0.1"
 dependencies = [
- "carboxyl 0.0.3 (git+https://github.com/aepsil0n/carboxyl)",
+ "carboxyl 0.0.5 (git+https://github.com/aepsil0n/carboxyl)",
  "clock_ticks 0.0.2 (git+https://github.com/tomaka/clock_ticks)",
- "device 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "gfx 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "gfx_macros 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "glfw 0.0.2 (git+https://github.com/bjz/glfw-rs)",
- "nalgebra 0.2.2 (git+https://github.com/sebcrozet/nalgebra)",
- "render 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
+ "glium 0.0.3 (git+https://github.com/tomaka/glium)",
+ "glium_macros 0.0.1 (git+https://github.com/tomaka/glium)",
+ "glutin 0.0.5 (git+https://github.com/tomaka/glutin)",
+ "nalgebra 0.2.3 (git+https://github.com/sebcrozet/nalgebra)",
 ]
 
 [[package]]
+name = "android_glue"
+version = "0.0.1"
+source = "git+https://github.com/tomaka/android-rs-glue#e133b3f5aa12bf2cba1191cac1af83a873d67e9d"
+
+[[package]]
 name = "bitflags"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "carboxyl"
-version = "0.0.3"
-source = "git+https://github.com/aepsil0n/carboxyl#d4c2cf1cb846dc65f1b8d2cb76697d2c92bef549"
+version = "0.0.5"
+source = "git+https://github.com/aepsil0n/carboxyl#4eddd602c2c70179f3b4ad72c9d71af68062b58f"
+
+[[package]]
+name = "cgmath"
+version = "0.0.6"
+source = "git+https://github.com/bjz/cgmath-rs#1705cf74d0fc51e5c2fb51ee54d13929a9269865"
+dependencies = [
+ "rand 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand_macros 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc-serialize 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "clock_ticks"
@@ -28,136 +41,184 @@ version = "0.0.2"
 source = "git+https://github.com/tomaka/clock_ticks#75347002bc4fee853b385da8d3b50fee1c146aae"
 
 [[package]]
-name = "device"
-version = "0.1.0"
-source = "git+http://github.com/gfx-rs/gfx-rs#8d2b40e63fec5fb456bf45c32fac799b0f31a989"
+name = "cocoa"
+version = "0.1.1"
+source = "git+https://github.com/servo/rust-cocoa#bb12c9c403f9edd88c222d1d4bd1e65948eae903"
 dependencies = [
- "bitflags 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "gfx_gl 0.1.0 (git+https://github.com/gfx-rs/gfx_gl.git)",
- "log 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
-name = "gcc"
-version = "0.1.7"
+name = "core_foundation"
+version = "0.1.0"
+source = "git+https://github.com/servo/rust-core-foundation#c577bd64b0301fe926cf7b757b9852a1ce1d521d"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "core_graphics"
+version = "0.1.0"
+source = "git+https://github.com/servo/rust-core-graphics#e169ad38f71ed003c21fb550a9dfa0e51423ed3a"
+dependencies = [
+ "core_foundation 0.1.0 (git+https://github.com/servo/rust-core-foundation)",
+]
+
+[[package]]
+name = "gdi32-sys"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "gfx"
-version = "0.1.0"
-source = "git+http://github.com/gfx-rs/gfx-rs#8d2b40e63fec5fb456bf45c32fac799b0f31a989"
 dependencies = [
- "device 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "gfx_macros 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "log 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "render 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "time 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
-
-[[package]]
-name = "gfx_gl"
-version = "0.1.0"
-source = "git+https://github.com/gfx-rs/gfx_gl.git#d945487cee92d5586214dc8bd21461d992538506"
-dependencies = [
- "gl_common 0.0.3 (git+https://github.com/bjz/gl-rs.git)",
- "gl_generator 0.0.13 (git+https://github.com/bjz/gl-rs.git)",
- "khronos_api 0.0.5 (git+https://github.com/bjz/gl-rs.git)",
-]
-
-[[package]]
-name = "gfx_macros"
-version = "0.1.0"
-source = "git+http://github.com/gfx-rs/gfx-rs#8d2b40e63fec5fb456bf45c32fac799b0f31a989"
 
 [[package]]
 name = "gl_common"
-version = "0.0.3"
-source = "git+https://github.com/bjz/gl-rs.git#c5303f86a9aac5392bae959b21a8af84e86510e3"
+version = "0.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "gl_generator"
-version = "0.0.13"
-source = "git+https://github.com/bjz/gl-rs.git#c5303f86a9aac5392bae959b21a8af84e86510e3"
-dependencies = [
- "gl_common 0.0.3 (git+https://github.com/bjz/gl-rs.git)",
- "khronos_api 0.0.5 (git+https://github.com/bjz/gl-rs.git)",
- "log 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "xml-rs 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "glfw"
-version = "0.0.2"
-source = "git+https://github.com/bjz/glfw-rs#2aed6cc66f07bdd1e9e93f48a68877a3ccecbca2"
-dependencies = [
- "bitflags 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "glfw-sys 3.0.42 (registry+https://github.com/rust-lang/crates.io-index)",
- "libc 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "semver 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "glfw-sys"
-version = "3.0.42"
+version = "0.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "khronos_api 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "log 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "xml-rs 0.1.19 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "glium"
+version = "0.0.3"
+source = "git+https://github.com/tomaka/glium#7d6b7b37263bad9e9bb7d2590605d60a4e1dcefa"
+dependencies = [
+ "cgmath 0.0.6 (git+https://github.com/bjz/cgmath-rs)",
+ "gl_common 0.0.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gl_generator 0.0.18 (registry+https://github.com/rust-lang/crates.io-index)",
+ "glutin 0.0.5 (git+https://github.com/tomaka/glutin)",
+ "image 0.2.0-alpha.10 (git+https://github.com/PistonDevelopers/image)",
+ "khronos_api 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "nalgebra 0.2.3 (git+https://github.com/sebcrozet/nalgebra)",
+]
+
+[[package]]
+name = "glium_macros"
+version = "0.0.1"
+source = "git+https://github.com/tomaka/glium#7d6b7b37263bad9e9bb7d2590605d60a4e1dcefa"
+
+[[package]]
+name = "glutin"
+version = "0.0.5"
+source = "git+https://github.com/tomaka/glutin#424dbb29ed52b76dedfee752699635337277568c"
+dependencies = [
+ "android_glue 0.0.1 (git+https://github.com/tomaka/android-rs-glue)",
+ "cocoa 0.1.1 (git+https://github.com/servo/rust-cocoa)",
+ "core_foundation 0.1.0 (git+https://github.com/servo/rust-core-foundation)",
+ "core_graphics 0.1.0 (git+https://github.com/servo/rust-core-graphics)",
+ "gdi32-sys 0.0.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gl_common 0.0.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "gl_generator 0.0.18 (registry+https://github.com/rust-lang/crates.io-index)",
+ "kernel32-sys 0.0.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "khronos_api 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "user32-sys 0.0.10 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "image"
+version = "0.2.0-alpha.10"
+source = "git+https://github.com/PistonDevelopers/image#7ed0daee0ced910bcd111a9c88158da149151260"
+dependencies = [
+ "num 0.1.14 (git+https://github.com/rust-lang/num)",
+]
+
+[[package]]
+name = "kernel32-sys"
+version = "0.0.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "winapi 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "khronos_api"
 version = "0.0.5"
-source = "git+https://github.com/bjz/gl-rs.git#c5303f86a9aac5392bae959b21a8af84e86510e3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "libc"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "log"
-version = "0.2.1"
+version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "nalgebra"
-version = "0.2.2"
-source = "git+https://github.com/sebcrozet/nalgebra#14df13809f8845196f2d1a5ba5b0b418bce84545"
+version = "0.2.3"
+source = "git+https://github.com/sebcrozet/nalgebra#012923d27567fbd07ec9be7d6857e046dd902b27"
 dependencies = [
- "rustc-serialize 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc-serialize 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
-name = "render"
-version = "0.1.0"
-source = "git+http://github.com/gfx-rs/gfx-rs#8d2b40e63fec5fb456bf45c32fac799b0f31a989"
+name = "num"
+version = "0.1.14"
+source = "git+https://github.com/rust-lang/num#7c203e27d3115643c5bdc0d69e819c221f417bc4"
 dependencies = [
- "device 0.1.0 (git+http://github.com/gfx-rs/gfx-rs)",
- "log 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rand 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc-serialize 0.2.15 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "rand"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "log 0.2.4 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "rand_macros"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "rustc-serialize"
-version = "0.2.10"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "semver"
-version = "0.1.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
-[[package]]
-name = "time"
-version = "0.1.15"
+name = "user32-sys"
+version = "0.0.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "gcc 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
- "libc 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "winapi"
+version = "0.1.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "xml-rs"
-version = "0.1.16"
+version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "bitflags 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 

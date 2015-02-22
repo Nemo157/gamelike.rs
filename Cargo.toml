@@ -3,20 +3,14 @@
   version = "0.0.1"
   authors = ["Wim Looman <ghostunderscore@gmail.com>"]
 
-[dependencies.gfx]
-  git = "http://github.com/gfx-rs/gfx-rs"
+[dependencies.glium]
+  git = "https://github.com/tomaka/glium"
 
-[dependencies.gfx_macros]
-  git = "http://github.com/gfx-rs/gfx-rs"
+[dependencies.glium_macros]
+  git = "https://github.com/tomaka/glium"
 
-[dependencies.device]
-  git = "https://github.com/gfx-rs/gfx-rs"
-
-[dependencies.render]
-  git = "https://github.com/gfx-rs/gfx-rs"
-
-[dependencies.glfw]
-  git = "https://github.com/bjz/glfw-rs"
+[dependencies.glutin]
+  git = "https://github.com/tomaka/glutin"
 
 [dependencies.carboxyl]
   git = "https://github.com/aepsil0n/carboxyl"

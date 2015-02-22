@@ -56,9 +56,9 @@ impl Camera {
     }
 
     pub fn view(&self, interpolation: f64) -> [[f32; 4]; 4] {
-        let facing = (self.lookat - self.position).normalize_cpy();
-        let side = facing.cross(&self.viewup).normalize_cpy();
-        let up = side.cross(&facing).normalize_cpy();
+        let facing = (self.lookat - self.position).normalize();
+        let side = facing.cross(&self.viewup).normalize();
+        let up = side.cross(&facing).normalize();
 
         let position = self.position + self.movement(interpolation);
 
@@ -85,11 +85,11 @@ impl Camera {
     fn forward(&self, amount: f64) -> Vec3<f64> {
         let mut facing = self.lookat - self.position;
         facing.y = 0.0;
-        facing.normalize_cpy() * amount
+        facing.normalize() * amount
     }
 
     fn right(&self, amount: f64) -> Vec3<f64> {
-        self.forward(1.0).cross(&self.viewup).normalize_cpy() * amount
+        self.forward(1.0).cross(&self.viewup).normalize() * amount
     }
 
     fn up(&self, amount: f64) -> Vec3<f64> {
