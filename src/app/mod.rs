@@ -41,6 +41,7 @@ impl App {
             }
             let interpolation = (precise_time_ns() + SKIP_TICKS - next_game_tick) as f64 / SKIP_TICKS as f64;
             self.view.render(interpolation, &self.world);
+            self.view.display.synchronize();
         }
     }
 }
