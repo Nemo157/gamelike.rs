@@ -22,6 +22,7 @@ impl App {
     pub fn run(&mut self) {
         let mut next_game_tick = precise_time_ns();
         let mut should_close = false;
+        let (mut horiz, mut vert) = (320, 240);
 
         while !should_close {
             let mut loops = 0;
@@ -30,10 +31,13 @@ impl App {
                     match event {
                         Event::Quit
                             => should_close = true,
-                        Event::Camera(direction, action)
+                        Event::MoveCamera(direction, action)
                             => self.view.camera.event(direction, action),
+                        Event::TurnCamera(horizontal, vertical)
+                            => { horiz = horizontal; vert = vertical; },
                     }
                 }
+                self.view.camera.turn((horiz - 320) as f64 / (32 as f64), ((vert - 240) as f64) / (24 as f64));
                 self.world.tick();
                 self.view.tick();
                 next_game_tick += SKIP_TICKS;
