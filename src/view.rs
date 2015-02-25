@@ -3,7 +3,6 @@ extern crate glutin;
 
 use std::default::Default;
 use std::num::Float;
-use std::sync::mpsc;
 
 use glium::DisplayBuild;
 use glium::Surface;
@@ -56,8 +55,7 @@ pub struct View {
 }
 
 impl View {
-    pub fn new(world: &world::World) -> View {
-
+    pub fn new() -> View {
         let display = glutin::WindowBuilder::new()
             .with_dimensions(640, 480)
             .with_title(format!("Triangle example."))

@@ -1,5 +1,6 @@
 #![feature(core)]
 #![feature(plugin)]
+#![feature(std_misc)]
 
 #![plugin(glium)]
 #![plugin(glium_macros)]
@@ -8,7 +9,6 @@
 extern crate glutin;
 extern crate clock_ticks;
 extern crate nalgebra;
-#[macro_use] extern crate glium_macros;
 
 mod app;
 mod view;
@@ -17,6 +17,6 @@ mod event;
 mod camera;
 
 fn main() {
-    let mut app = app::init().unwrap();
+    let mut app = app::App::new();
     app.run();
 }

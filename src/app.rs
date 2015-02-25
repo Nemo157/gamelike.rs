@@ -1,12 +1,8 @@
 use clock_ticks::precise_time_ns;
 
-use { view, world, camera };
+use { view, world };
 
 use event::Event;
-
-pub use self::init::init;
-
-mod init;
 
 const TICKS_PER_SECOND: u64 = 25;
 const SKIP_TICKS: u64 = 1_000_000_000 / TICKS_PER_SECOND;
@@ -15,12 +11,21 @@ const RENDER_SKIP_TICKS: u64 = 1_000_000_000 / RENDER_TICKS_PER_SECOND;
 const MAX_FRAMESKIP: u8 = 2;
 
 pub struct App {
-    start: u64,
     world: world::World,
     view: view::View,
 }
 
 impl App {
+    pub fn new() -> App {
+        let world = world::World::new();
+        let view = view::View::new();
+
+        App {
+            world: world,
+            view: view,
+        }
+    }
+
     pub fn run(&mut self) {
         let (mut next_game_tick, mut next_render_tick) = (precise_time_ns(), precise_time_ns());
         let mut should_close = false;
