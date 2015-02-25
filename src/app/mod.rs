@@ -9,7 +9,9 @@ pub use self::init::init;
 mod init;
 
 const TICKS_PER_SECOND: u64 = 25;
-const SKIP_TICKS: u64 = 1000_000_000 / TICKS_PER_SECOND;
+const SKIP_TICKS: u64 = 1_000_000_000 / TICKS_PER_SECOND;
+const RENDER_TICKS_PER_SECOND: u64 = 60;
+const RENDER_SKIP_TICKS: u64 = 1_000_000_000 / RENDER_TICKS_PER_SECOND;
 const MAX_FRAMESKIP: u8 = 2;
 
 pub struct App {
@@ -20,7 +22,7 @@ pub struct App {
 
 impl App {
     pub fn run(&mut self) {
-        let mut next_game_tick = precise_time_ns();
+        let (mut next_game_tick, mut next_render_tick) = (precise_time_ns(), precise_time_ns());
         let mut should_close = false;
         let (mut horiz, mut vert) = (320, 240);
 
@@ -43,9 +45,11 @@ impl App {
                 next_game_tick += SKIP_TICKS;
                 loops += 1;
             }
-            let interpolation = (precise_time_ns() + SKIP_TICKS - next_game_tick) as f64 / SKIP_TICKS as f64;
-            self.view.render(interpolation, &self.world);
-            self.view.display.synchronize();
+            if precise_time_ns() > next_render_tick {
+                let interpolation = (precise_time_ns() + SKIP_TICKS - next_game_tick) as f64 / SKIP_TICKS as f64;
+                self.view.render(interpolation, &self.world);
+                next_render_tick += RENDER_SKIP_TICKS
+            }
         }
     }
 }
